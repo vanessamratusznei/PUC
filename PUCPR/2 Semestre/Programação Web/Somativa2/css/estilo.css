@@ -1,0 +1,227 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Style the header */
+header {
+  background-color: #25326e;
+  padding: 30px;
+  text-align: center;
+  font-size: 35px;
+  color: white;
+}
+
+/* Container for flexboxes */
+section {
+  display: -webkit-flex;
+  display: flex;
+}
+
+/* Style the navigation menu */
+nav {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  background: #25326e5d;
+  padding: 20px;
+}
+
+/* Style the list inside the menu */
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Style the content */
+article {
+  -webkit-flex: 3;
+  -ms-flex: 3;
+  flex: 3;
+  background-color: #25326e31;
+  padding: 10px;
+}
+
+/* Style the footer */
+footer {
+  background-color: #25326e;
+  padding: 10px;
+}
+
+footer p {
+  font-size: 12px;
+  text-align: center;
+  color: white;
+}
+
+/* Responsive layout - makes the menu and the content (inside the section) sit on top of each other instead of next to each other */
+@media (max-width: 600px) {
+  section {
+	-webkit-flex-direction: column;
+	flex-direction: column;
+  }
+}
+
+
+ul#menu {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul#menu li a {
+  display: block;
+  color: #000;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+ul#menu li a.active {
+  background-color: #25326e;
+  color: white;
+}
+
+ul#menu li a.activecad {
+  background-color: #25326e5d;
+  color: black;
+}
+
+ul#menu li a:hover:not(.active) {
+  background-color: #25326e5d;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.index {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.index form {
+  border: 1px solid #ccc; /* Espessura, estilo e cor da borda */
+  padding-top: 30px;
+  padding-right: 30px;
+  padding-left: 30px;
+  padding-bottom: 15px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  background-color: white;
+}
+
+.index form label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+input[type=text], [type=email], [type="tel"], input[type=password], select, textarea {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+input:-webkit-autofill,
+textarea:-webkit-autofill {
+  box-shadow: 0 0 0 1000px white inset;
+}
+
+input[type=submit] {
+  display: inline-block; 
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  background-color: #45a049;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px; 
+  margin-top: 10px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049cc;
+}
+
+article a {
+  display: inline-block; 
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.541);
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px; 
+  margin-top: 10px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+article a:hover {
+  background-color: rgba(0, 0, 0, 0.445);
+}
+
+.nomeusuario {
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.938);
+}
+
+.tabela {
+  width: 90%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.tabela th {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: center;
+  background-color: #25326e5d;
+  font-size: 15px;
+}
+
+.tabela td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: center;
+  background-color: white;
+}
+
+article table a {
+  display: inline-block; 
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  background-color: #45a049;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px; 
+  margin-top: 0;
+  margin-bottom: 0;
+  cursor: pointer;
+}
+
+article table a:hover {
+  background-color: #45a049cc;
+}
+

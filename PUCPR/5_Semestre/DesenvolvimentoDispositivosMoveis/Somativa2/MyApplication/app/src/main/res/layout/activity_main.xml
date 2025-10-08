@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <!-- Título da tela -->
+    <TextView
+        android:id="@+id/tituloAnimes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Meus Animes"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:padding="16dp"
+        android:textColor="#000000" />
+
+    <!-- Lista de animes abaixo do título -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewAnimes"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/tituloAnimes"
+        android:layout_above="@+id/fabAdicionarAnime"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Botão para adicionar anime -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAdicionarAnime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="16dp"
+        android:contentDescription="Adicionar anime"
+        app:srcCompat="@android:drawable/ic_input_add" />
+
+    <!-- Botão para acessar assistidos -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAssistidos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_margin="16dp"
+        android:contentDescription="Ver assistidos"
+        app:srcCompat="@android:drawable/ic_menu_view" />
+</RelativeLayout>

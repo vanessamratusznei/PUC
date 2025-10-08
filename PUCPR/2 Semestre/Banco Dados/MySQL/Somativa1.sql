@@ -1,0 +1,63 @@
+drop database if exists Lanchonete;
+create database Lanchonete;
+use Lanchonete;
+
+create table Sanduiche(
+	idSanduiche int auto_increment primary key,
+    nome varchar(45) not null,
+    valor decimal(4,2) not null
+);
+
+create table Cliente(
+	idCliente int auto_increment primary key,
+    nome varchar(45) not null,
+    telefone varchar(45) not null,
+    enderecoLogradouro varchar(45) not null,
+    enderecoNumero varchar(45) not null,
+    enderecoBairro varchar(45) not null
+);
+
+create table Entregador(
+	idEntregador int auto_increment primary key,
+    nome varchar(45) not null,
+    celular varchar(45) not null
+);
+
+
+create table Pedido(
+	idPedido int auto_increment primary key,
+    dataExpedicao datetime not null,
+    statusPedido int not null,
+    idCliente int not null,
+    idEntregador int not null,
+    foreign key(idCliente) references Cliente(idCliente),
+    foreign key(idEntregador) references Entregador(idEntregador)
+);
+
+create table Pedido_has_Sanduiche(
+	idPedido int,
+    idSanduiche int,
+    quantidade int not null,
+    primary key (idPedido, idSanduiche),
+    foreign key(idPedido) references Pedido(idPedido),
+    foreign key(idSanduiche) references Sanduiche(idSanduiche)
+);
+
+insert into Lanchonete.Cliente(nome, telefone, enderecoLogradouro, enderecoNumero, enderecoBairro) values
+	('Milani', '3217-6000', 'Av Senador Salgado Filho', '3725', 'Uberaba');
+    
+insert into Lanchonete.Entregador(nome, celular) values
+	('Joao', '98990-2015');
+
+insert into Lanchonete.Sanduiche(nome, valor) values
+	('Sanduiche de Queijo', 25.50), ('Sanduiche de Carne', 29.50);
+    
+insert into Lanchonete.Pedido(dataExpedicao, statusPedido, idCliente, idEntregador) values
+	('2023-07-08 20:30:00', 0, 1, 1);
+
+insert into Lanchonete.Pedido_has_Sanduiche(idPedido, idSanduiche, quantidade) values
+	(1, 1, 2), (1, 2, 1);
+
+select * from Lanchonete.Pedido 
+left join Lanchonete.Pedido_has_Sanduiche on Lanchonete.Pedido.idPedido = Lanchonete.Pedido_has_Sanduiche.idPedido
+where statusPedido = 0

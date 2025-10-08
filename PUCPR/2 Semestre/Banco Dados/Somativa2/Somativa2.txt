@@ -1,0 +1,61 @@
+drop database if exists LojaDeVinhos;
+create database LojaDeVinhos;
+use LojaDeVinhos;
+
+create table Regiao(
+	codRegiao bigint auto_increment primary key,
+    nomeRegiao varchar(100) not null,
+    descricaoRegiao text
+);
+
+create table Vinicola(
+	codVinicola bigint auto_increment primary key,
+    nomeVinicola varchar(100) not null,
+    descricaoVinicola text,
+    foneVinicola varchar(15),
+    emailVinicola varchar(50),
+    codRegiao bigint not null,
+    foreign key(codRegiao) references Regiao(codRegiao)
+);
+
+create table Vinho(
+	codVinho bigint auto_increment primary key,
+    nomeVinho varchar(50) not null,
+    tipoVinho varchar(50) not null,
+    anoVinho int not null,
+    descricaoVinho text,
+    codVinicola bigint not null,
+    foreign key(codVinicola) references Vinicola(codVinicola)
+);
+
+insert into LojaDeVinhos.Regiao(nomeRegiao, descricaoRegiao) values
+	("Norte","Amazonas, Pará, Romaima, Amapá, Rondônia, Acre, Tocantins"),
+    ("Nordeste", "Piauí, Maranhão, Pernambuco, Rio Grande do Norte, Paraíba, Ceará, Bahia, Alagoas, Sergipe"),
+    ("Centro-Oeste", "Mato Grosso, Mato Grosso do Sul, Goiás"), 
+    ("Sudeste", "São Paulo, Rio de Janeiro, Espírito Santo, Minas Gerais"), 
+    ("Sul", "Rio Grande do Sul, Paraná, Santa Catarina");
+    
+insert into LojaDeVinhos.Vinicola(nomeVinicola, descricaoVinicola, foneVinicola, emailVinicola, codRegiao) values
+	("Vinícola Villa Santa Maria", "São Bento do Sapucaí, Serra da Mantiqueira, São Paulo", "(12) 996492728", "vinicolavsm.contato@outlook.com", 4),
+    ("Vinícola Jolimont", "Gramado, Rio Grande do Sul", "(54) 32276600", "vjolimont.contato@hotmail.com", 5),
+    ("Vinícola Durigan", "Santa Felicidade, Curitiba, Paraná", "(41) 995384692", "loja@vinhosdurigan.com.br", 5),
+    ("Vinícola Rio Sol", "Lagoa Grande, Pernambuco", "(87) 38699385", "sac@vinibrasil.com.br", 2),
+    ("Vinícola Chandon", "Garibaldi, Rio Grande do Sul", "(54 33884400)", "chandon.faleconosco@outlook.com.br", 5);
+ 
+ insert into LojaDeVinhos.Vinho(nomeVinho, tipoVinho, anoVinho, descricaoVinho, codVinicola) values
+	("Brandina Assemblage", "Vinho Fino Tinto Seco", 2020, "Gran Reserva - Colheita de inverno", 1),
+    ("Rosé Le Fleur", "Vinho Fino Rosado Seco", 2023, "Premiação 2023 Decanter World Wine Awards Bronze - Uva Pinot Noir", 2),
+    ("Vinho de Mesa Branco Suave", "Vinho Branco Suave", 2023, "Garrafa de 700ml, Variedade Niágara, Teor Alcoólico 9,5% vol", 3),
+    ("Blisse Frisante Rosé Suave", "Vinho Frisante Rosé Suave", 2022, "Uva Moscato Hamburgo e Aragonês, Garrafa 750ml - Teor Alcoólico 7,5% vol", 4),
+    ("Chandon Riche Demi-Sec", "Vinho Meio Seco", 2021, "Gourmet, Generoso e Aveludado. Composição de Uvas: 70% Riesling Itálico; 15% Pinot Noir; 15% Chardonnay. Garrafa 750ml. Teor Alcoólico 11,6% vol. ", 5);
+ 
+select nomeVinho, anoVinho, nomeVinicola, nomeRegiao from LojaDeVinhos.Vinho
+inner join LojaDeVinhos.Vinicola on LojaDeVinhos.Vinho.codVinicola = LojaDeVinhos.Vinicola.codVinicola
+inner join LojaDeVinhos.Regiao on LojaDeVinhos.Vinicola.codRegiao = LojaDeVinhos.Regiao.codRegiao;
+    
+
+create user 'sommelier'@'localhost' identified by 'ADSpucpr2023';
+
+grant select on LojaDeVinhos.Vinho to 'sommelier'@'localhost';
+grant select (codVinicola, nomeVinicola) on LojaDeVinhos.Vinicola to 'sommelier'@'localhost';   
+alter user 'sommelier'@'localhost' with max_queries_per_hour 40;

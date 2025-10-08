@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Clínica Bicho Feliz</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap">
+    <style>
+         body {
+                font-family: 'Comfortaa', sans-serif;
+            }
+        table {
+            width: 100%;
+        }
+        td.service {
+            width: 33.33%;
+            text-align: center;
+            position: relative;
+        }
+        .service img {
+            max-width: 100%;
+            height: auto;
+        }
+        .service-details {
+            background-color: #ffffff;
+            padding: 10px;
+            text-align: center;
+            position: absolute;
+            bottom: 10px; /* Um pouco mais para cima */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 325px;
+            height: 116px;
+            border: 2px solid #b8bec5;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .service-details h3, .service-details p {
+            font-size: 17px;
+            color: #004aad;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="images/logo.png" alt="Logo da Clínica Bicho Feliz">
+                <span class="logo-text">Clínica Bicho Feliz</span>
+            </div>                      
+            <nav class="menu">
+                <ul>
+                    <li><a href="index.html" class="active">Início</a></li>
+                    <li><a href="form.html">Agendar Consulta</a></li>
+                    <li><a href="about.html">Sobre Nós</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <table>
+                <tr>
+                    <td class="services"></td>
+                        <div class="services">
+                            <h2>Nossos Serviços</h2>
+                            <div class="cards">
+                        </div>
+                    </td>
+                    <td class="service">
+                        <img src="images/service1.png" alt="Serviço de vacinação">
+                        <div class="service-details">
+                            <h3>VACINAÇÃO</h3>
+                            <p>Proteja seu pet contra as principais doenças com nosso serviço de vacinação.</p>
+                        </div>
+                    </td>
+                    <td class="service">
+                        <img src="images/service2.png" alt="Serviço de castração">
+                        <div class="service-details">
+                            <h3>CASTRAÇÃO</h3>
+                            <p>Evite a reprodução indesejada e previna problemas de saúde com nosso serviço de castração.</p>
+                        </div>
+                    </td>
+                    <td class="service">
+                        <img src="images/service3.png" alt="Serviço de banho e tosa">
+                        <div class="service-details">
+                            <h3>BANHO E TOSA</h3>
+                            <p>Deixe seu pet mais bonito e cheiroso com nosso serviço de banho e tosa.</p>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <p>© 2023 Clínica Bicho Feliz. Todos os direitos reservados.</p>
+            <p>Desenvolvido pelo grupo 46</p>
+        </div>
+    </footer>
+</body>
+</html>

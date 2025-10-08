@@ -1,0 +1,102 @@
+'''  Nome: Vanessa Milani Ratusznei
+    Curso: Análise e Desenvolvimento de Sistemas'''
+
+# Exibir Menu Principal
+estudantes = []
+while True:
+    try:
+        print('MENU PRINCIPAL:')
+        menu_principal = ('1. Estudantes', '2. Disciplinas', '3. Professores', '4. Turmas', '5. Matrículas',
+                          '6. Sair')
+        for menu in menu_principal:
+            print(menu)
+
+        # Selecionar a opção do Menu Principal
+        opcao_mp = int(input('Selecione uma opção: '))
+
+        # Sair do programa
+        if opcao_mp == 6:
+            print('Você selecionou a opção', menu_principal[5], '\n\nAté mais!')
+            break
+
+        # Mostrar a opção escolhida do Menu Principal
+        if opcao_mp <= len(menu_principal) and opcao_mp > 0:
+            for i in range(6):
+                if opcao_mp == i:
+                    print('Você selecionou a opção %s \n' %menu_principal[i-1])
+
+        # Ação para as opções 2, 3, 4 e 5 do Menu Principal
+        if opcao_mp == 2 or opcao_mp == 3 or opcao_mp == 4 or opcao_mp == 5:
+            print('EM DESENVOLVIMENTO\n')
+
+        # Ações para as opção 1 do Menu Principal
+        elif opcao_mp == 1:
+
+            # Exibir Menu de Operações
+            while True:
+                try:
+                    print('MENU DE OPERAÇÕES:')
+                    menu_operacoes = ('1. Incluir', '2. Listar', '3. Atualizar', '4. Excluir',
+                                      '5. Voltar ao Menu Principal')
+                    for menu in menu_operacoes:
+                        print(menu)
+
+                    # Selecionar opção do Menu de Operações
+                    opcao_op = int(input('Selecione uma opção: '))
+
+                    # Voltar para Menu Principal
+                    if opcao_op == 5:
+                        print('Você selecionou a opção', menu_operacoes[4], '\n')
+                        break
+
+                    # Mostrar a opção escolhida do Menu de Operações
+                    if opcao_op <= len(menu_operacoes) and opcao_op > 0:
+                        for i in range(5):
+                            if opcao_op == i:
+                                print('Você selecionou a opção %s \n' % menu_operacoes[i - 1])
+
+                    # Ação para oção 3 e 4 do Menu de Operações
+                    if opcao_op == 3 or opcao_op == 4:
+                        print('EM DESENVOLVIMENTO\n')
+
+                    # Ações para a opção 1 do Menu de Operações
+                    elif opcao_op == 1:
+                        continuar = 1
+                        while continuar == 1: # Loop para poder incluir mais de um elemento
+                            estudante = input('Digite o nome do estudante: ')
+                            estudantes.append(estudante)
+                            while True: # Loop para aceitar somente 0 ou 1 para a variavel "continuar"
+                                try:
+                                    continuar = int(input('Deseja incluir mais estudantes? (0 - Não, 1 - Sim) '))
+                                    if continuar < 0 or continuar > 1:
+                                        print('Opção inválida. Tente novamente!\n')
+                                    else:
+                                        print('\n')
+                                        break
+                                except ValueError:
+                                    print('Opção inválida. Tente novamente!\n')
+
+                    # Ações para a opção 2 do Menu de Operações
+                    elif opcao_op == 2:
+                        if estudantes == []: # Para identificar que ainda não foi cadastrado nenhum estudante
+                            print('Não há estudantes cadastrados')
+                        else: # Mostrar os estudantes cadastrados
+                            for i in range(len(estudantes)):
+                                print(i+1, '-', estudantes[i])
+                        print('\n')
+
+                    # Opcoes invalidas (inteiros que nao fazem parte do Menu de Operações)
+                    else:
+                        print('Opção inválida. Tente novamente!\n')
+
+                # Opcoes invalidas (que não são inteiros) para o Menu de Operações
+                except ValueError:
+                    print('Opção inválida. Tente novamente!\n')
+
+        # Opcoes invalidas (inteiros que nao fazem parte do Menu Principal)
+        else:
+            print('Opção inválida. Tente novamente!\n')
+
+    # Opcoes invalidas (que não são inteiros) para o Menu Principal
+    except ValueError:
+        print('Opção inválida. Tente novamente!\n')

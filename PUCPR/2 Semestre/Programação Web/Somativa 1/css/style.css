@@ -1,0 +1,200 @@
+:root {
+    --orange: #fca311;
+    --blue: #004aad;
+    --white: #ffffff;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Comfortaa&display=swap');
+
+/* Defina a fonte principal para o corpo do documento */
+body {
+    font-family: 'Comfortaa', sans-serif;
+}
+
+* {
+    font-family: 'Comfortaa', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    background-color: var(--orange);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 20px 0;
+}
+
+.menu {
+    margin-left: 70px; /* Adicione margem para afastar da logo */
+}
+
+.menu ul {
+    list-style: none;
+    padding: 0;
+    display: flex; /* Torna os itens de lista flexíveis */
+    justify-content: center; /* Centraliza os itens horizontalmente */
+}
+
+.menu li {
+    display: inline-block; 
+}
+
+.menu ul li:not(:last-child)::after {
+    color: var(--white);
+    content: " | "; /* Adicione o caractere "|" após cada item da lista, exceto o último */
+    margin-left: 10px; /* Ajuste o espaçamento horizontal entre o caractere "|" e o texto */
+    margin-right: 15px;
+}
+
+.menu a {
+    color: var(--white);
+    text-decoration: none;
+}
+
+.menu a:hover {
+    color: var(--white);
+    text-decoration: underline;
+    text-underline-offset: 5px;
+}
+
+.menu a.active {
+    color: var(--white);
+    text-decoration: underline;
+    text-underline-offset: 5px;
+}
+
+/* Definindo o estilo do conteúdo principal */
+main {
+    background-color: var(--white);
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px; /* Aumentando o tamanho máximo do conteúdo */
+    margin: 0 auto;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 60px; /* Reduzindo o tamanho do logo */
+}
+
+.logo-text {
+    font-size: 40px;
+    font-weight: bold;
+    color: white; /* Cor branca */
+    margin-left: 10px; /* Espaço entre a imagem do logo e o texto */
+}
+
+h2 {
+    color: var(--blue);
+    text-align: center;
+    font-size: 28px; /* Tamanho maior para títulos */
+    padding: 20px 0;
+}
+
+p {
+    color: var(--blue);
+    text-align: justify;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+main .container a {
+    text-align: justify;
+    margin-top: 20px;
+}
+
+ul {
+    color: var(--blue);
+}
+
+.button {
+    display: inline-block; /* Botão agora em linha com o texto */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--orange);
+    color: var(--white);
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px; /* Tamanho maior para botões */
+    margin-top: 20px;
+}
+
+.button:hover {
+    background-color: var(--blue);
+}
+
+/* Definindo o estilo do rodapé */
+footer {
+    background-color: var(--blue);
+    margin-top: 20px;
+    padding: 30px;
+}
+
+footer p {
+    color: var(--white);
+    text-align: center;
+    font-size: 12px;
+    margin: 0;
+    padding: 5px;
+}
+
+.aboutImage {
+    width: 100%;
+    margin-left: 30px;
+}
+
+.container .service-details {
+    
+    height: 120px;
+    border: none;
+    background-color: transparent;
+}
+
+.container .service-details h3 {
+    color: var(--white);
+    text-align: center;
+    padding: 5px;
+}
+
+.container .service-details p {
+    color: var(--white);
+    text-align: justify;
+    padding: 10px;
+    font-size: 16px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+input[type="time"],
+select,
+textarea {
+    width: 100%;
+    font-size: 13px;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid;
+    border-radius: 5px;
+}
+
+.nomeusuario {
+    font-weight: bold;
+  }

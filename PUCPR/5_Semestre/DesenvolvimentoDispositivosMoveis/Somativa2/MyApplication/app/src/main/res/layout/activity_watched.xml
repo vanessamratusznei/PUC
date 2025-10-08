@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Título da tela -->
+    <TextView
+        android:id="@+id/tituloAssistidos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Animes Assistidos"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:padding="8dp"
+        android:textColor="#000000" />
+
+    <!-- RecyclerView com a lista de assistidos -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewAssistidos"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="8dp" />
+</LinearLayout>

@@ -1,0 +1,444 @@
+'''  Nome: Vanessa Milani Ratusznei
+    Curso: Análise e Desenvolvimento de Sistemas '''
+
+import json
+
+#Função para mostrar o Menu Principal:
+def menu_principal():
+    while True:
+        try:
+            print('MENU PRINCIPAL:')
+            menu_principal = ('1. Estudantes', '2. Disciplinas', '3. Professores', '4. Turmas', '5. Matrículas',
+                              '6. Sair')
+            for menu in menu_principal:
+                print(menu)
+            opcao = int(input('Selecione uma opção: '))
+            break
+
+        except ValueError:
+            print('Opção Invalida! Tente novamente:')
+    return opcao
+
+#Função para mostrar Menu de Operações:
+def menu_operacoes():
+    while True:
+        try:
+            print('MENU DE OPERAÇÕES:')
+            menu_operacoes = ('1. Incluir', '2. Listar', '3. Atualizar', '4. Excluir',
+                      '5. Voltar ao Menu Principal')
+            for menu in menu_operacoes:
+                print(menu)
+            opcao = int(input('Selecione uma opção: '))
+            break
+
+        except ValueError:
+            print('Opção Invalida! Tente novamente:')
+    return opcao
+
+#Função para salvar arquivos em .json
+def salvar_arquivo(lista, arquivo):
+    with open(arquivo, 'w', encoding='utf-8') as arquivo_aberto:
+        json.dump(lista, arquivo_aberto, ensure_ascii=False)
+
+#Função para ler arquivos em .json
+def ler_arquivo(arquivo):
+    try:
+        with open(arquivo, 'r', encoding='utf-8') as arquivo_aberto:
+            lista = json.load(arquivo_aberto)
+        return lista
+    except:
+        return []
+
+#Função para incluir cadastro de estudantes e professores:
+def incluir_objetos(arquivo):
+    codigo = int(input('Digite o código:(apenas numeros) '))
+    nome = input('Digite o nome: ')
+    cpf = input('Digite o CPF: ')
+    pessoa = {'Código': codigo, 'Nome': nome, 'CPF': cpf}
+    lista = ler_arquivo(arquivo)
+    lista.append(pessoa)
+    salvar_arquivo(lista, arquivo)
+
+#Função para listar os itens cadastrados no arquivo (.json):
+def listar_objetos(arquivo):
+    lista = ler_arquivo(arquivo)
+    if lista == []:  # Para identificar que ainda não foi cadastrado nenhum estudante
+        print('Não há objetos cadastrados')
+    else:  # Mostrar os estudantes cadastrados
+        for i in range(len(lista)):
+            print(i + 1, '-', lista[i])
+    print('\n')
+
+#Função para editar estudantes e professores cadastrados:
+def editar_objeto(codigo, arquivo):
+    codigo_editado = None
+    lista = ler_arquivo(arquivo)
+    for pessoa in lista:
+        if pessoa['Código'] == codigo:
+            pessoa['Nome'] = input('Digite o novo nome: ')
+            pessoa['CPF'] = input('Digite o novo CPF: ')
+            print('\nAlterção concluida!\n')
+            salvar_arquivo(lista, arquivo)
+            return
+    print('\nCódigo não encontrado.\n')
+
+#Função para excluir estudantes e professores cadastrados:
+def excluir_objeto(codigo, arquivo):
+    objeto_remover = None
+    lista = ler_arquivo(arquivo)
+    for objeto in lista:
+        if objeto['Código'] == codigo:
+            objeto_remover = objeto
+            break
+    if objeto_remover != None:
+        lista.remove(objeto_remover)
+        salvar_arquivo(lista, arquivo)
+        print('\nExclusão concluida!\n')
+    else:
+        print('\nCódigo não encontrado.\n')
+
+#Função para incluir cadastro de disciplinas:
+def incluir_disciplina(arquivo):
+    codigo = int(input('Digite o código:(apenas numeros) '))
+    nome = input('Digite o nome: ')
+    objeto = {'Código': codigo, 'Nome': nome}
+    lista = ler_arquivo(arquivo)
+    lista.append(objeto)
+    salvar_arquivo(lista, arquivo)
+
+#Função para editar cadatsro de deisciplinas:
+def editar_disciplina(codigo, arquivo):
+    codigo_editado = None
+    lista = ler_arquivo(arquivo)
+    for objeto in lista:
+        if objeto['Código'] == codigo:
+            objeto['Nome'] = input('Digite o novo nome: ')
+            print('\nAlterção concluida!\n')
+            salvar_arquivo(lista, arquivo)
+            return
+    print('\nCódigo não encontrado.\n')
+
+#Função para incluir cadastro de turmas:
+def incluir_turma(arquivo):
+    codigo_turma = int(input('Digite o código da turma:(apenas numeros) '))
+    codigo_discip = int(input('Digite o código da disciplina:(apenas numeros) '))
+    codigo_prof = int(input('Digite o código do professor:(apenas numeros) '))
+    objeto = {'Código da Turma': codigo_turma, 'Código da Disciplina': codigo_discip,
+              'Código do Professor': codigo_prof}
+    lista = ler_arquivo(arquivo)
+    lista.append(objeto)
+    salvar_arquivo(lista, arquivo)
+
+#Função para editar cadastro de turmas:
+def editar_turma(codigo, arquivo):
+    codigo_editado = None
+    lista = ler_arquivo(arquivo)
+    for objeto in lista:
+        if objeto['Código da Turma'] == codigo:
+            objeto['Código da Disciplina'] = int(input('Digite o novo código da disciplina:(apenas numeros) '))
+            objeto['Código do Professor'] = int(input('Digite o novo código do professor:(apenas numeros) '))
+            print('\nAlterção concluida!\n')
+            salvar_arquivo(lista, arquivo)
+            return
+    print('\nCódigo não encontrado.\n')
+
+#Função para excluir turmas cadastradas:
+def excluir_turma(codigo, arquivo):
+    objeto_remover = None
+    lista = ler_arquivo(arquivo)
+    for objeto in lista:
+        if objeto['Código da Turma'] == codigo:
+            objeto_remover = objeto
+            break
+    if objeto_remover != None:
+        lista.remove(objeto_remover)
+        salvar_arquivo(lista, arquivo)
+        print('\nExclusão concluida!\n')
+    else:
+        print('\nCódigo não encontrado.\n')
+
+#Função para incluir cadastro de matriculas:
+def incluir_matricula(arquivo):
+    codigo_est = int(input('Digite o código do estudante:(apenas numeros) '))
+    codigo_turma = int(input('Digite o código da turma:(apenas numeros) '))
+    objeto = {'Código do Estudante': codigo_est, 'Código da Turma': codigo_turma}
+    lista = ler_arquivo(arquivo)
+    lista.append(objeto)
+    salvar_arquivo(lista, arquivo)
+
+#Função para editar cadastro de matriculas:
+def editar_matricula(codigo, arquivo):
+    codigo_editado = None
+    lista = ler_arquivo(arquivo)
+    for objeto in lista:
+        if objeto['Código do Estudante'] == codigo:
+            objeto['Código da Turma'] = int(input('Digite o novo código da turma:(apenas numeros) '))
+            print('\nAlterção concluida!\n')
+            salvar_arquivo(lista, arquivo)
+            return
+    print('\nCódigo não encontrado.\n')
+
+#Função para excluir matriculas cadastradas
+def excluir_matricula(codigo, arquivo):
+    objeto_remover = None
+    lista = ler_arquivo(arquivo)
+    for objeto in lista:
+        if objeto['Código do Estudante'] == codigo:
+            objeto_remover = objeto
+            break
+    if objeto_remover != None:
+        lista.remove(objeto_remover)
+        salvar_arquivo(lista, arquivo)
+        print('\nExclusão concluida!\n')
+    else:
+        print('\nCódigo não encontrado.\n')
+
+arquivo_estudante = 'estudantes.json'
+arquivo_disciplina = 'disciplinas.json'
+arquivo_professor = 'professores.json'
+arquivo_turma = 'turmas.json'
+arquivo_matricula = 'matriculas.json'
+
+while True:
+    try:
+        # Exibir Menu Principal e selecionar uma opção:
+        opcao_mp = menu_principal()
+        # Mostrar a opção escolhida do Menu Principal:
+        if opcao_mp <= 6 and opcao_mp > 0:
+            print('\nVocê selecionou a opção %s \n' % opcao_mp)
+        # Sair do programa:
+        if opcao_mp == 6:
+            print('Até mais!')
+            break
+        # Ações para as opção 1 (Estudantes) do Menu Principal:
+        elif opcao_mp == 1:
+            while True:
+                try:
+                    # Exibir Menu de Operações e selecionar uma opção:
+                    opcao_op = menu_operacoes()
+                    # Mostrar a opção escolhida do Menu de Operações:
+                    if opcao_op <= 5 and opcao_op > 0:
+                        print('\nVocê selecionou a opção %s \n' % opcao_op)
+                    # Voltar para Menu Principal:
+                    if opcao_op == 5:
+                        break
+                    # Ações para a opção 1 (Incluir) do Menu de Operações:
+                    elif opcao_op == 1:
+                        continuar = 1
+                        while continuar == 1: # Loop para poder incluir mais de um elemento
+                            incluir_objetos(arquivo_estudante)
+                            while True: # Loop para aceitar somente 0 ou 1 para a variavel "continuar"
+                                try:
+                                    continuar = int(input('Deseja incluir mais estudantes? (0 - Não, 1 - Sim) '))
+                                    if continuar < 0 or continuar > 1:
+                                        print('Opção inválida. Tente novamente!\n')
+                                    else:
+                                        print('\n')
+                                        break
+                                except ValueError:
+                                    print('Opção inválida. Tente novamente!\n')
+                    # Ações para a opção 2 (Listar) do Menu de Operações:
+                    elif opcao_op == 2:
+                        listar_objetos(arquivo_estudante)
+                    # Ação para oção 3 (Editar) do Menu de Operações:
+                    elif opcao_op == 3:
+                        codigo = int(input('Digite o código para editar: '))
+                        editar_objeto(codigo, arquivo_estudante)
+                    # Ação para oção 4 (Remover) do Menu de Operações:
+                    elif opcao_op == 4:
+                        codigo = int(input('Digite o codigo para remover: '))
+                        excluir_objeto(codigo, arquivo_estudante)
+                    # Opcoes invalidas (inteiros que nao fazem parte do Menu de Operações)
+                    else:
+                        print('\nOpção inválida. Tente novamente!\n')
+                # Opcoes invalidas (que não são inteiros) para o Menu de Operações
+                except ValueError:
+                    print('Opção inválida. Tente novamente!\n')
+
+        # Ação para as opção 2 (Disciplinas) do Menu Principal:
+        elif opcao_mp == 2:
+            while True:
+                try:
+                    # Exibir Menu de Operações e selecionar uma opção:
+                    opcao_op = menu_operacoes()
+                    # Mostrar a opção escolhida do Menu de Operações:
+                    if opcao_op <= 5 and opcao_op > 0:
+                        print('\nVocê selecionou a opção %s \n' % opcao_op)
+                    # Voltar para Menu Principal:
+                    if opcao_op == 5:
+                        break
+                    # Ações para a opção 1 (Incluir) do Menu de Operações
+                    elif opcao_op == 1:
+                        continuar = 1
+                        while continuar == 1:  # Loop para poder incluir mais de um elemento
+                            incluir_disciplina(arquivo_disciplina)
+                            while True:  # Loop para aceitar somente 0 ou 1 para a variavel "continuar"
+                                try:
+                                    continuar = int(input('Deseja incluir mais disciplinas? (0 - Não, 1 - Sim) '))
+                                    if continuar < 0 or continuar > 1:
+                                        print('Opção inválida. Tente novamente!\n')
+                                    else:
+                                        print('\n')
+                                        break
+                                except ValueError:
+                                    print('Opção inválida. Tente novamente!\n')
+                    # Ações para a opção 2 (Listar) do Menu de Operações:
+                    elif opcao_op == 2:
+                        listar_objetos(arquivo_disciplina)
+                    # Ação para oção 3 (Alterar) do Menu de Operações
+                    elif opcao_op == 3:
+                        codigo = int(input('Digite o código para editar: '))
+                        editar_disciplina(codigo, arquivo_disciplina)
+                    # Ação para oção 4 (Excluir) do Menu de Operações
+                    elif opcao_op == 4:
+                        codigo = int(input('Digite o codigo para remover: '))
+                        excluir_objeto(codigo, arquivo_disciplina)
+                        # Opcoes invalidas (inteiros que nao fazem parte do Menu de Operações)
+                    else:
+                        print('\nOpção inválida. Tente novamente!\n')
+                # Opcoes invalidas (que não são inteiros) para o Menu de Operações
+                except ValueError:
+                    print('Opção inválida. Tente novamente!\n')
+
+        # Ação para as opção 3 (Professores) do Menu Principal:
+        elif opcao_mp == 3:
+            while True:
+                try:
+                    # Exibir Menu de Operações e selecionar uma opção:
+                    opcao_op = menu_operacoes()
+                    # Mostrar a opção escolhida do Menu de Operações:
+                    if opcao_op <= 5 and opcao_op > 0:
+                        print('\nVocê selecionou a opção %s \n' % opcao_op)
+                    # Voltar para Menu Principal:
+                    if opcao_op == 5:
+                        break
+                    # Ações para a opção 1 (Incluir) do Menu de Operações:
+                    elif opcao_op == 1:
+                        continuar = 1
+                        while continuar == 1:  # Loop para poder incluir mais de um elemento
+                            incluir_objetos(arquivo_professor)
+                            while True:  # Loop para aceitar somente 0 ou 1 para a variavel "continuar"
+                                try:
+                                    continuar = int(input('Deseja incluir mais professores? (0 - Não, 1 - Sim) '))
+                                    if continuar < 0 or continuar > 1:
+                                        print('Opção inválida. Tente novamente!\n')
+                                    else:
+                                        print('\n')
+                                        break
+                                except ValueError:
+                                    print('Opção inválida. Tente novamente!\n')
+                    # Ações para a opção 2 (Listar) do Menu de Operações:
+                    elif opcao_op == 2:
+                        listar_objetos(arquivo_professor)
+                    # Ação para oção 3 (Editar) do Menu de Operações:
+                    elif opcao_op == 3:
+                        codigo = int(input('Digite o código para editar: '))
+                        editar_objeto(codigo, arquivo_professor)
+                    # Ação para oção 4 (Remover) do Menu de Operações:
+                    elif opcao_op == 4:
+                        codigo = int(input('Digite o codigo para remover: '))
+                        excluir_objeto(codigo, arquivo_professor)
+                    # Opcoes invalidas (inteiros que nao fazem parte do Menu de Operações)
+                    else:
+                        print('\nOpção inválida. Tente novamente!\n')
+                # Opcoes invalidas (que não são inteiros) para o Menu de Operações
+                except ValueError:
+                    print('Opção inválida. Tente novamente!\n')
+
+        # Ação para as opção 4 (Turmas) do Menu Principal:
+        elif opcao_mp == 4:
+            while True:
+                try:
+                    # Exibir Menu de Operações e selecionar uma opção:
+                    opcao_op = menu_operacoes()
+                    # Mostrar a opção escolhida do Menu de Operações:
+                    if opcao_op <= 5 and opcao_op > 0:
+                        print('\nVocê selecionou a opção %s \n' % opcao_op)
+                    # Voltar para Menu Principal:
+                    if opcao_op == 5:
+                        break
+                    # Ações para a opção 1 (Incluir) do Menu de Operações:
+                    elif opcao_op == 1:
+                        continuar = 1
+                        while continuar == 1:  # Loop para poder incluir mais de um elemento
+                            incluir_turma(arquivo_turma)
+                            while True:  # Loop para aceitar somente 0 ou 1 para a variavel "continuar"
+                                try:
+                                    continuar = int(input('Deseja incluir mais turmas? (0 - Não, 1 - Sim) '))
+                                    if continuar < 0 or continuar > 1:
+                                        print('Opção inválida. Tente novamente!\n')
+                                    else:
+                                        print('\n')
+                                        break
+                                except ValueError:
+                                    print('Opção inválida. Tente novamente!\n')
+                    # Ações para a opção 2 (Listar) do Menu de Operações:
+                    elif opcao_op == 2:
+                        listar_objetos(arquivo_turma)
+                    # Ação para oção 3 (Editar) do Menu de Operações:
+                    elif opcao_op == 3:
+                        codigo_turma = int(input('Digite o código da turma para editar: '))
+                        editar_turma(codigo_turma, arquivo_turma)
+                    # Ação para oção 4 (Remover) do Menu de Operações:
+                    elif opcao_op == 4:
+                        codigo_turma = int(input('Digite o codigo da turma para remover: '))
+                        excluir_turma(codigo_turma, arquivo_turma)
+                    # Opcoes invalidas (inteiros que nao fazem parte do Menu de Operações)
+                    else:
+                        print('\nOpção inválida. Tente novamente!\n')
+                # Opcoes invalidas (que não são inteiros) para o Menu de Operações
+                except ValueError:
+                    print('Opção inválida. Tente novamente!\n')
+
+        # Ação para as opção 5 (Matriculas) do Menu Principal:
+        elif opcao_mp == 5:
+            while True:
+                try:
+                    # Exibir Menu de Operações e selecionar uma opção:
+                    opcao_op = menu_operacoes()
+                    # Mostrar a opção escolhida do Menu de Operações:
+                    if opcao_op <= 5 and opcao_op > 0:
+                        print('\nVocê selecionou a opção %s \n' % opcao_op)
+                    # Voltar para Menu Principal:
+                    if opcao_op == 5:
+                        break
+                    # Ações para a opção 1 (Incluir) do Menu de Operações:
+                    elif opcao_op == 1:
+                        continuar = 1
+                        while continuar == 1:  # Loop para poder incluir mais de um elemento
+                            incluir_matricula(arquivo_matricula)
+                            while True:  # Loop para aceitar somente 0 ou 1 para a variavel "continuar"
+                                try:
+                                    continuar = int(input('Deseja incluir mais matriculas? (0 - Não, 1 - Sim) '))
+                                    if continuar < 0 or continuar > 1:
+                                        print('Opção inválida. Tente novamente!\n')
+                                    else:
+                                        print('\n')
+                                        break
+                                except ValueError:
+                                    print('Opção inválida. Tente novamente!\n')
+                    # Ações para a opção 2 (Listar) do Menu de Operações:
+                    elif opcao_op == 2:
+                        listar_objetos(arquivo_matricula)
+                    # Ação para oção 3 (Editar) do Menu de Operações:
+                    elif opcao_op == 3:
+                        codigo_est = int(input('Digite o código do estudante para editar a turma: '))
+                        editar_matricula(codigo_est, arquivo_matricula)
+                    # Ação para oção 4 (Remover) do Menu de Operações:
+                    elif opcao_op == 4:
+                        codigo_est = int(input('Digite o codigo do estudante para remover sua matricula: '))
+                        excluir_matricula(codigo_est, arquivo_matricula)
+                    # Opcoes invalidas (inteiros que nao fazem parte do Menu de Operações)
+                    else:
+                        print('\nOpção inválida. Tente novamente!\n')
+                # Opcoes invalidas (que não são inteiros) para o Menu de Operações
+                except ValueError:
+                    print('Opção inválida. Tente novamente!\n')
+
+        # Opcoes invalidas (inteiros que nao fazem parte do Menu Principal)
+        else:
+            print('\nOpção inválida. Tente novamente!\n')
+
+    # Opcoes invalidas (que não são inteiros) para o Menu Principal
+    except ValueError:
+        print('\nOpção inválida. Tente novamente!\n')
